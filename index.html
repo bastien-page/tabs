@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <style>
+            .d-none {
+                display: none;
+            }
+            .is-show {
+                background-color: aqua;
+                display: block;
+            }
+
+            .is-active {
+                background-color: coral;
+            }
+        </style>
+        <div class="js-tabs">
+            <ul role="tablist">
+                <li
+                    role="tab"
+                    id="onglet-1"
+                    tabindex="-1"
+                    aria-selected="false"
+                    aria-controls="panneau-1"
+                    data-tab-item
+                >
+                    Onglet 1
+                </li>
+                <li
+                    class="is-active"
+                    role="tab"
+                    id="onglet-2"
+                    tabindex="0"
+                    aria-selected="true"
+                    aria-controls="panneau-2"
+                    data-tab-item
+                >
+                    Onglet 2
+                </li>
+                <li
+                    role="tab"
+                    id="onglet-3"
+                    tabindex="-1"
+                    aria-selected="false"
+                    aria-controls="panneau-3"
+                    data-tab-item
+                >
+                    Onglet 3
+                </li>
+                <li
+                    role="tab"
+                    id="onglet-4"
+                    tabindex="-1"
+                    aria-selected="false"
+                    aria-controls="panneau-4"
+                    data-tab-item
+                >
+                    Onglet 4
+                </li>
+            </ul>
+            <div
+                class="d-none"
+                role="tabpanel"
+                id="panneau-1"
+                aria-labelledby="onglet-1"
+                tabindex="0"
+                data-tab-content
+            >
+                [Contenu du premier panneau (masqué)]
+            </div>
+            <div
+                class="is-show"
+                role="tabpanel"
+                id="panneau-2"
+                aria-labelledby="onglet-2"
+                tabindex="0"
+                data-tab-content
+            >
+                [Contenu du deuxième panneau (affiché, car onglet associé
+                sélectionné)]
+            </div>
+            <div
+                class="d-none"
+                role="tabpanel"
+                id="panneau-3"
+                aria-labelledby="onglet-3"
+                tabindex="0"
+                data-tab-content
+            >
+                [Contenu du troisième panneau (masqué)]
+            </div>
+            <div
+                class="d-none"
+                role="tabpanel"
+                id="panneau-4"
+                aria-labelledby="onglet-4"
+                tabindex="0"
+                data-tab-content
+            >
+                [Contenu du quatrième panneau (masqué)]
+            </div>
+        </div>
+
+        <script src="Tabs.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
