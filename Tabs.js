@@ -1,23 +1,39 @@
 class Tabs {
     constructor(elt) {
-        this.tabs = elt.querySelectorAll('[data-tab-item]')
+        this.tabs = Array.from(elt.querySelectorAll('[data-tab-item]'))
         this.tabsContent = Array.from(
             elt.querySelectorAll('[data-tab-content]')
         )
     }
 
     evenHendler() {
-        this.tabs.forEach((tab) => {
+        this.tabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
-                const tabContent = this.tabsContent.find(
-                    (elt) => elt.id === tab.getAttribute('aria-controls')
-                )
-                this.hiddenTabsContent()
-                this.resetTab()
-                this.activeTab(tab)
-                this.showTabContent(tabContent)
+                this.changeTab(tab)
+            })
+            tab.addEventListener('focus', () => {
+                console.log('first', index)
+                document.addEventListener('keyup', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                        this.tabs[index + 1].focus()
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        this.tabs[index - 1].focus()
+                    } else if (e.key === 'Enter') {
+                        this.changeTab(tab)
+                    }
+                })
             })
         })
+    }
+
+    changeTab(tab) {
+        const tabContent = this.tabsContent.find(
+            (elt) => elt.id === tab.getAttribute('aria-controls')
+        )
+        this.hiddenTabsContent()
+        this.resetTab()
+        this.activeTab(tab)
+        this.showTabContent(tabContent)
     }
 
     hiddenTabsContent() {
