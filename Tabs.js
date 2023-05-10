@@ -4,7 +4,8 @@ class Tabs {
         this.tabsContent = Array.from(
             elt.querySelectorAll('[data-tab-content]')
         )
-        this.index = 1
+        this.index
+        this.test = 1
     }
 
     evenHendler() {
@@ -13,26 +14,30 @@ class Tabs {
                 this.changeTab(tab)
             })
             tab.addEventListener('focus', () => {
+                this.index = index
                 console.log('this index', this.index)
                 document.addEventListener('keyup', (e) => {
-                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    this.test++
+                    console.log('this.test', this.test)
+                    if (e.key === 'Enter') {
+                        this.changeTab(tab)
+                    } else if (
+                        e.key === 'ArrowRight' ||
+                        e.key === 'ArrowDown'
+                    ) {
                         if (index < this.tabs.length - 1) {
                             this.index = index + 1
-                            this.tabs[this.index].focus()
                         } else {
                             this.index = 0
-                            this.tabs[this.index].focus()
                         }
+                        this.tabs[this.index].focus()
                     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                         if (index === 0) {
                             this.index = this.tabs.length - 1
-                            this.tabs[this.index].focus()
                         } else {
                             this.index = index - 1
-                            this.tabs[this.index].focus()
                         }
-                    } else if (e.key === 'Enter') {
-                        this.changeTab(tab)
+                        this.tabs[this.index].focus()
                     }
                 })
             })
