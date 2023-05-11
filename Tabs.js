@@ -4,8 +4,9 @@ class Tabs {
         this.tabsContent = Array.from(
             elt.querySelectorAll('[data-tab-content]')
         )
-        this.index
-        this.test = 1
+        this.index = this.tabs.findIndex((elt) =>
+            elt.classList.contains('is-active')
+        )
     }
 
     evenHendler() {
@@ -13,34 +14,26 @@ class Tabs {
             tab.addEventListener('click', () => {
                 this.changeTab(tab)
             })
-            tab.addEventListener('focus', () => {
-                this.index = index
-                console.log('this index', this.index)
-                document.addEventListener('keyup', (e) => {
-                    this.test++
-                    console.log('this.test', this.test)
-                    if (e.key === 'Enter') {
-                        this.changeTab(tab)
-                    } else if (
-                        e.key === 'ArrowRight' ||
-                        e.key === 'ArrowDown'
-                    ) {
-                        if (index < this.tabs.length - 1) {
-                            this.index = index + 1
-                        } else {
-                            this.index = 0
-                        }
-                        this.tabs[this.index].focus()
-                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                        if (index === 0) {
-                            this.index = this.tabs.length - 1
-                        } else {
-                            this.index = index - 1
-                        }
-                        this.tabs[this.index].focus()
-                    }
-                })
-            })
+        })
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                this.changeTab(this.tabs[this.index])
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                if (this.index < this.tabs.length - 1) {
+                    this.index++
+                } else {
+                    this.index = 0
+                }
+                this.tabs[this.index].focus()
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                if (this.index === 0) {
+                    this.index = this.tabs.length - 1
+                } else {
+                    this.index--
+                }
+                this.tabs[this.index].focus()
+            }
         })
     }
 
@@ -73,6 +66,7 @@ class Tabs {
 
     showTabContent(tabContent) {
         tabContent.classList.add('is-show')
+        tabContent.classList.remove('d-none')
     }
 
     activeTab(tab) {
