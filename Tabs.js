@@ -10,30 +10,29 @@ class Tabs {
     }
 
     evenHendler() {
-        this.tabs.forEach((tab, index) => {
+        this.tabs.forEach((tab) => {
             tab.addEventListener('click', () => {
                 this.changeTab(tab)
             })
-        })
-
-        document.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') {
-                this.changeTab(this.tabs[this.index])
-            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                if (this.index < this.tabs.length - 1) {
-                    this.index++
-                } else {
-                    this.index = 0
+            tab.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    this.changeTab(this.tabs[this.index])
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    if (this.index < this.tabs.length - 1) {
+                        this.index++
+                    } else {
+                        this.index = 0
+                    }
+                    this.tabs[this.index].focus()
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    if (this.index === 0) {
+                        this.index = this.tabs.length - 1
+                    } else {
+                        this.index--
+                    }
+                    this.tabs[this.index].focus()
                 }
-                this.tabs[this.index].focus()
-            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                if (this.index === 0) {
-                    this.index = this.tabs.length - 1
-                } else {
-                    this.index--
-                }
-                this.tabs[this.index].focus()
-            }
+            })
         })
     }
 
